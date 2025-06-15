@@ -1,0 +1,15 @@
+# docker-compose.yml
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: quantview-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - ENV=dev
+    restart: unless-stopped
