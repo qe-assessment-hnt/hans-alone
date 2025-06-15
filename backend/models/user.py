@@ -1,7 +1,11 @@
 # models/user.py
-from pydantic import BaseModel
+from sqlalchemy import Column, Integer, String
+from database.database import Base
 
-class User(BaseModel):
-    username: str
-    password: str
-    role: str  # 'admin', 'client', 'analyst'
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True, nullable=False)
+    hashed_password = Column(String, nullable=False)
+    role = Column(String, default="client")
